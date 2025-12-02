@@ -25,7 +25,7 @@ def simulate(requested_water_temp, sampling_period, integration_constant):
     tank_bottom_area = 0.2 # meter
     tank_height = 1 # meter
     water_flow = 0.035 # constant for input / output
-
+    I_term = 0
     start_temp = 20
 
     temperature = [start_temp]       # initial temperature
@@ -34,7 +34,7 @@ def simulate(requested_water_temp, sampling_period, integration_constant):
     volume = calculateTankArea(tank_height, tank_bottom_area) #get tank volume
     for n in range(1000):
 
-        new_error, I_term, u = errorCalc(requested_water_temp, temperature[-1], sampling_period, integration_constant)
+        new_error, I_term, u = errorCalc(requested_water_temp, temperature[-1], sampling_period, integration_constant, I_term)
         e.append(new_error)
         requiredPower = u * heater_power
         heat_capacity = water_heat_const * water_density * volume
