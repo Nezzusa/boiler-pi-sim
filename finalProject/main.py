@@ -4,10 +4,13 @@ from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 
 
-def errorCalc(requested_water_temp, current_temp, sampling_period, integration_constant):
-    new_error = requested_water_temp - current_temp
-    I_term = (sampling_period / integration_constant) * new_error
-    return new_error, I_term
+def errorCalc(Tw, current_temp, Tp, Ti, I_prev, kp):
+    e = Tw - current_temp
+    I = I_prev + (Tp / Ti) * e
+    u = kp * (e + I)
+    u = max(0, min(1, u))
+
+    return e, I, u
 
 
 def calculateTankArea(tank_height, tank_bottom_area):
@@ -23,15 +26,20 @@ def simulate(requested_water_temp, sampling_period, integration_constant):
     tank_height = 1 # meter
     water_flow = 0.035 # constant for input / output
 
-    temperature = [0]       # initial temperature
+    start_temp = 20
+
+    temperature = [start_temp]       # initial temperature
     e = []
 
     volume = calculateTankArea(tank_height, tank_bottom_area) #get tank volume
     for n in range(1000):
-        new_error, I_term = errorCalc(requested_water_temp, temperature[-1], sampling_period, integration_constant)
-        e.append(new_error)
 
-        x = (heater_power * I_term * sampling_period) / (water_heat_const * water_density * volume) + (1 - (water_flow / volume)) * temperature[-1]
+        new_error, I_term, u = errorCalc(requested_water_temp, temperature[-1], sampling_period, integration_constant)
+        e.append(new_error)
+        requiredPower = u * heater_power
+        heat_capacity = water_heat_const * water_density * volume
+        temperature_ratio = 1 - (water_flow/volume)
+        x = ((requiredPower * sampling_period) / heat_capacity)  + temperature_ratio * temperature[-1]
         temperature.append(x)
 
     return temperature
