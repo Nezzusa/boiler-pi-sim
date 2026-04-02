@@ -10,6 +10,7 @@ def waterLevelChangeOverTime():
     timestamp = [0.0]
     minLevel = 0.0
     maxLevel = 5.0
+    kp = 0.001 # reaction agressivenes
 
     for i in range(int(simulationTime/testPeriod)):
         timestamp.append(timestamp[-1] + testPeriod)
