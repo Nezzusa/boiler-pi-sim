@@ -8,6 +8,19 @@ The application allows visualization of the temperature change over time, based 
 
 ![Project Screenshot](images/overview.png)
 
+The discrete PI controller is implemented using the following equation:
+
+$$
+u(n) = k_p \left[ e(n) + \frac{T_p}{T_i} \sum_{k=0}^{n} e(k) \right]
+$$
+
+where:
+- **Kp** – proportional gain  
+- **Ti** – integral time constant  
+- **Tp** – sampling period  
+- **u(n)** – control signal   
+- **e(n)** – control error
+
 ### Main features:
 * **Physics Simulation:** Accounts for water heat capacity, heater power, and fluid flow.
 * **PI Controller:** Enables testing the impact of proportional gain ($K_p$) and integral time ($T_i$) on system stability.
