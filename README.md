@@ -13,5 +13,20 @@ The application allows visualization of the temperature change over time, based 
 ## Technologies
 * **Python 3.14**
 * **Dash 4.1.0** 
-* **Plotly 6.6.0** 
+* **Plotly 6.6.0**
+
+## How to run?
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Nezzusa/boiler-pi-sim.git
+   cd boiler-pi-sim
+   ```
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Run the script**
+   ```bash
+   python main.py
+   ```
 
