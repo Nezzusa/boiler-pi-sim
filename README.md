@@ -4,6 +4,7 @@ Python-based thermal simulation of a closed boiler system. Features a discrete P
 
 ## About
 The application allows visualization of the temperature change over time, based on selected parameters of the PI controller and boiler specifications (size and heater). Main purpose of the application is to show how the PI controller automatically regulates heating power, to keep flowing water at desired temperature.
+![Project Screenshot](images/overview.png)
 
 ### Main features:
 * **Physics Simulation:** Accounts for water heat capacity, heater power, and fluid flow.
@@ -23,10 +24,10 @@ The application allows visualization of the temperature change over time, based 
    ```
 2. **Install dependencies**
    ```bash
-   pip install -r requirements.txt
+   py -m pip install -r requirements.txt
    ```
 3. **Run the script**
    ```bash
-   python main.py
+   py main.py
    ```
 
