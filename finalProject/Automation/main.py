@@ -18,10 +18,10 @@ import plotly.graph_objs as go
 #    return new_voltage
 
 
-def calculate_voltage(kp, Tp, Ti, current_error, error_sum):
+def calculate_voltage(proportional_gain, sampling_period, integration_constant, current_error, error_sum):
     voltage_max = 0.95
     voltage_min = 0.0
-    new_voltage = kp * (current_error + (Tp / Ti) * error_sum)
+    new_voltage = proportional_gain * (current_error + (sampling_period / integration_constant) * error_sum)
     new_voltage = max(voltage_min, min(voltage_max, new_voltage))
 
     return new_voltage
@@ -53,7 +53,7 @@ def simulate(requested_water_temp, sampling_period, integration_constant, boiler
     water_density = 997
     water_flow = 0.00005
     inflow_temp = 10
-    kp = 0.075
+    proportional_gain = 0.075
 
     temperature = [inflow_temp]
     volume = boiler_volume
@@ -64,9 +64,9 @@ def simulate(requested_water_temp, sampling_period, integration_constant, boiler
     for n in range(int(simulation_time / sampling_period)):
         current_error = requested_water_temp - temperature[-1]
         error_sum += current_error
-        u = calculate_voltage(kp, sampling_period, integration_constant, current_error, error_sum)
+        control_signal = calculate_voltage(proportional_gain, sampling_period, integration_constant, current_error, error_sum)
 
-        requiredPower = u * heater_power  # power required to heat water
+        requiredPower = control_signal * heater_power  # power required to heat water
         heater_power_list.append(requiredPower)
 
         heat_capacity = water_heat_const * water_density * volume
@@ -129,13 +129,11 @@ app.layout = html.Div([
         #Sliders
         html.Div([
             html.Label("Required Water Temperature (°C)", style={'fontWeight': 'bold', 'color': '#2d3436'}),
-            dcc.Slider(id='temperature', min=30, max=70, step=1, value=50,
-                       marks={i: f'{i}°' for i in range(30, 71, 10)}),
+            dcc.Slider(id='temperature', min=30, max=70, step=1, value=50, marks={i: f'{i}°' for i in range(30, 71, 10)}),
 
             html.Label("Sampling Time",
                        style={'fontWeight': 'bold', 'color': '#2d3436', 'marginTop': '20px', 'display': 'block'}),
-            dcc.Slider(id='sampling', min=0.1, max=1, step=0.1, value=0.1,
-                       marks={i / 10: str(i / 10) for i in range(1, 11, 2)}),
+            dcc.Slider(id='sampling', min=0.1, max=1, step=0.1, value=0.1, marks={i / 10: str(i / 10) for i in range(1, 11, 2)}),
 
             html.Label("Integration Constant",
                        style={'fontWeight': 'bold', 'color': '#2d3436', 'marginTop': '20px', 'display': 'block'}),
@@ -196,11 +194,11 @@ app.layout = html.Div([
      State('boiler-size', 'value'),
      State('heater-power', 'value')]
 )
-def update_graph(n_clicks, temperature, tp, ti, boiler_volume, heater_power):
+def update_graph(n_clicks, temperature, sampling_period, integration_constant, boiler_volume, heater_power):
     if n_clicks == 0:
         return go.Figure(), go.Figure()
 
-    y, x, p = simulate(temperature, tp, ti, boiler_volume, heater_power)
+    y, x, p = simulate(temperature, sampling_period, integration_constant, boiler_volume, heater_power)
 
     #graph 1
     fig = go.Figure()

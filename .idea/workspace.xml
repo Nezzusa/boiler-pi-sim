@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eee800d1-e65b-49bc-b753-a068d3751f11" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finalProject/Automation/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/finalProject/Automation/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +52,7 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "ai.playground.ignore.import.keys.banner.in.settings": "true",
     "git-widget-placeholder": "final",
-    "last_opened_file_path": "D:/programowanie/Projekty/PodstawyAutomatyki/Automation-basics",
+    "last_opened_file_path": "C:/Users/radek/Desktop/DANE/projects/Automation-basics/Automation-basics",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -109,6 +110,7 @@
       <workItem from="1764678308741" duration="206000" />
       <workItem from="1764678674503" duration="4526000" />
       <workItem from="1775136619191" duration="558000" />
+      <workItem from="1775212680996" duration="1645000" />
     </task>
     <servers />
   </component>
