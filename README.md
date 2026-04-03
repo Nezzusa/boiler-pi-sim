@@ -21,7 +21,7 @@ where:
 - **u(n)** – control signal   
 - **e(n)** – control error
 
-Special thanks to @Majorx500 for identifying the physics equations used in this project.
+Special thanks to <a href="https://github.com/Majorx500">Majorx500</a> for identifying the physics equations used in this project.
 
 ### Main features:
 * **Physics Simulation:** Accounts for water heat capacity, heater power, and fluid flow.
