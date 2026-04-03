@@ -18,8 +18,8 @@ The application allows visualization of the temperature change over time, based 
 ## How to run?
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/Nezzusa/Automation-basics.git](https://github.com/Nezzusa/Automation-basics.git)
-   cd Automation-basics
+   git clone [https://github.com/Nezzusa/Automation-basics.git](https://github.com/Nezzusa/boiler-pi-sim.git)
+   cd boiler-pi-sim
    ```
 2. **Install dependencies**
    ```bash
