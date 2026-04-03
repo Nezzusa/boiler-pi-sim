@@ -1,4 +1,4 @@
-# Water Boiler PI Control Simulation
+# Automated heater with PI controller simulation
 
 Python-based thermal simulation of a closed boiler system. Features a discrete PI control algorithm and interactive dashboard powered by **Dash** and **Plotly**.
 
